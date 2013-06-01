@@ -29,7 +29,7 @@
                :lunette)
   :components
   ((:module "src/simple"
-            :serial t
             :components
             ((:file "package")
-             (:file "simple-win")))))
+             (:file "simple-win"  :depends-on ("package"))
+             (:file "hello-paint" :depends-on ("package"))))))

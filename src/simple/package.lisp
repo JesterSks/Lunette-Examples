@@ -19,3 +19,9 @@
         #:cffi
         #:Lunette)
   (:export #:winmain))
+
+(defpackage :Lunette.Examples.Hello-Paint
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:export #:winmain))
