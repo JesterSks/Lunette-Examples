@@ -33,9 +33,9 @@
 (defun WinMain ()
   (setf *default-foreign-encoding* :utf-16le)
 
-  (register-class "SimpleWin" :lpfnWndProc (callback WindowFunc))
+  (register-class "HelloPaintWin" :lpfnWndProc (callback WindowFunc))
 
-  (let ((hwnd (create-window-ex "SimpleWin" "Simple Window")))
+  (let ((hwnd (create-window-ex "HelloPaintWin" "Simple Window")))
     (ShowWindow hwnd SW_SHOW)
     (ShowWindow hwnd SW_SHOW)
     (UpdateWindow hwnd)
