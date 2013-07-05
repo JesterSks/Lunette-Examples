@@ -32,4 +32,8 @@
             :components
             ((:file "package")
              (:file "simple-win"  :depends-on ("package"))
-             (:file "hello-paint" :depends-on ("package"))))))
+             (:file "hello-paint" :depends-on ("package"))))
+   (:module "src/graphics"
+            :components
+            ((:file "package")
+             (:file "pen-styles" :depends-on ("package"))))))
