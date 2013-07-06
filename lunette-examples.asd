@@ -36,4 +36,5 @@
    (:module "src/graphics"
             :components
             ((:file "package")
-             (:file "pen-styles" :depends-on ("package"))))))
+             (:file "pen-styles"   :depends-on ("package"))
+             (:file "brush-styles" :depends-on ("package"))))))

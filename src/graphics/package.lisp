@@ -33,3 +33,24 @@
                 #:MoveToEx
                 #:LineTo)
   (:export #:winmain))
+
+(defpackage :Lunette.Examples.Brush-Styles
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.Graphics
+                #:HS_HORIZONTAL
+                #:HS_VERTICAL
+                #:HS_FDIAGONAL
+                #:HS_BDIAGONAL
+                #:HS_CROSS
+                #:HS_DIAGCROSS
+
+                #:CreateSolidBrush
+                #:CreateHatchBrush
+                #:SelectObject
+                #:DeleteObject
+                #:RGB
+                #:MoveToEx
+                #:Rectangle)
+  (:export #:winmain))
