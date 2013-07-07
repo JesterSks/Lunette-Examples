@@ -54,3 +54,22 @@
                 #:MoveToEx
                 #:Rectangle)
   (:export #:winmain))
+
+(defpackage :Lunette.Examples.Filled-Shapes
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.Graphics
+                #:LTGRAY_BRUSH
+
+                #:GetStockObject
+                #:SelectObject
+                #:DeleteObject
+                #:MoveToEx
+                #:Rectangle
+                #:Ellipse
+                #:RoundRect
+                #:Arc
+                #:Pie
+                #:Chord)
+  (:export #:winmain))
