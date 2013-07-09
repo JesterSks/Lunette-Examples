@@ -59,6 +59,10 @@
   (:use #:common-lisp
         #:cffi
         #:Lunette)
+  (:import-from :Lunette.System
+                #:POINT
+                #:x
+                #:y)
   (:import-from :Lunette.Graphics
                 #:LTGRAY_BRUSH
 
@@ -70,7 +74,9 @@
                 #:RoundRect
                 #:Arc
                 #:Pie
-                #:Chord)
+                #:Chord
+                #:Polygon
+                #:PolyPolygon)
   (:export #:winmain))
 
 (defpackage :Lunette.Examples.Lines
