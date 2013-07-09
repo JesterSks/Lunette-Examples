@@ -64,7 +64,6 @@
 
                 #:GetStockObject
                 #:SelectObject
-                #:DeleteObject
                 #:MoveToEx
                 #:Rectangle
                 #:Ellipse
@@ -72,4 +71,34 @@
                 #:Arc
                 #:Pie
                 #:Chord)
+  (:export #:winmain))
+
+(defpackage :Lunette.Examples.Lines
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:DWORD
+                #:BYTE
+
+                #:POINT
+                #:x
+                #:y)
+  (:import-from :Lunette.Graphics
+                #:PT_CLOSEFIGURE
+                #:PT_LINETO
+                #:PT_BEZIERTO
+                #:PT_MOVETO
+
+                #:MoveToEx
+                #:LineTo
+                #:Polyline
+                #:PolylineTo
+                #:PolyPolyline
+                #:Arc
+                #:AngleArc
+                #:ArcTo
+                #:PolyBezier
+                #:PolyBezierTo
+                #:PolyDraw)
   (:export #:winmain))
