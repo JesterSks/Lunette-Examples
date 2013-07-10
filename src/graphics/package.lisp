@@ -108,3 +108,22 @@
                 #:PolyBezierTo
                 #:PolyDraw)
   (:export #:winmain))
+
+(defpackage :Lunette.Examples.Poly-Winding
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:POINT
+                #:x
+                #:y)
+  (:import-from :Lunette.Graphics
+                #:LTGRAY_BRUSH
+                #:ALTERNATE
+                #:WINDING
+
+                #:SetPolyFillMode
+                #:GetStockObject
+                #:SelectObject
+                #:Polygon)
+  (:export #:winmain))

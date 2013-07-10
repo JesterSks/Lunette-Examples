@@ -39,4 +39,5 @@
              (:file "pen-styles"    :depends-on ("package"))
              (:file "brush-styles"  :depends-on ("package"))
              (:file "filled-shapes" :depends-on ("package"))
-             (:file "lines"         :depends-on ("package"))))))
+             (:file "lines"         :depends-on ("package"))
+             (:file "poly-winding"  :depends-on ("package"))))))
