@@ -163,3 +163,26 @@
                 #:GetStockObject
                 #:SetROP2)
   (:export #:winmain))
+
+
+(defpackage :Lunette.Examples.Coordinates-Origin
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.Graphics
+                #:BLACK_BRUSH
+
+                #:RECT
+                #:left
+                #:top
+                #:right
+                #:bottom
+
+                #:SelectObject
+                #:MoveToEx
+                #:LineTo
+                #:GetStockObject
+                #:SetWindowOrgEx)
+  (:import-from :Lunette.Windows
+                #:GetClientRect)
+  (:export #:winmain))
