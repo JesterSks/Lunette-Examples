@@ -42,4 +42,5 @@
              (:file "lines"              :depends-on ("package"))
              (:file "poly-winding"       :depends-on ("package"))
              (:file "drawing-modes"      :depends-on ("package"))
-             (:file "coordinates-origin" :depends-on ("package"))))))
+             (:file "coordinates-origin" :depends-on ("package"))
+             (:file "mapping-mode"       :depends-on ("package"))))))

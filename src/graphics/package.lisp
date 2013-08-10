@@ -186,3 +186,28 @@
   (:import-from :Lunette.Windows
                 #:GetClientRect)
   (:export #:winmain))
+
+(defpackage :Lunette.Examples.Mapping-Mode
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.Graphics
+                #:BLACK_BRUSH
+
+                #:MM_LOENGLISH
+
+                #:RECT
+                #:left
+                #:top
+                #:right
+                #:bottom
+
+                #:SelectObject
+                #:MoveToEx
+                #:LineTo
+                #:GetStockObject
+                #:SetViewportOrgEx
+                #:SetMapMode)
+  (:import-from :Lunette.Windows
+                #:GetClientRect)
+  (:export #:winmain))
