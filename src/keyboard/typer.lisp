@@ -50,7 +50,7 @@
   (defun clearBuffer ()
     (loop for i
           from 0
-          to (1- (* bWdith bHeight))
+          to (1- (* bWidth bHeight))
           do (setf (char pBuffer i) #\Space)))
 
   (defun setCharAt (xPos yPos aChar)
@@ -158,7 +158,7 @@
   (defun handleChar (hWnd aChar)
     (cond
      ((eql aChar #\Backspace)
-      (when (> 0 xCaret)
+      (when (> xCaret 0)
         (decf xCaret)
         (SendMessage hWnd WM_KEYDOWN VK_DELETE 1)))
      ((eql aChar #\Tab)
