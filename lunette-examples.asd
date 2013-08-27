@@ -47,4 +47,8 @@
    (:module "src/keyboard"
             :components
             ((:file "package")
-             (:file "typer" :depends-on ("package"))))))
+             (:file "typer" :depends-on ("package"))))
+   (:module "src/mouse"
+            :components
+            ((:file "package")
+             (:file "connect" :depends-on ("package"))))))
