@@ -73,3 +73,58 @@
 
                 #:GetClientRect)
   (:export #:winmain))
+
+(defpackage :Lunette.Examples.checker2
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:POINT
+                #:x
+                #:y
+
+                #:hiword
+                #:loword
+                #:makelong)
+  (:import-from :Lunette.Errors
+                #:MessageBeep)
+  (:import-from :Lunette.Messages
+                #:WM_SIZE
+                #:WM_CREATE
+                #:WM_LBUTTONDOWN
+                #:WM_SETFOCUS
+                #:WM_KILLFOCUS
+                #:WM_KEYDOWN
+
+                #:SendMessage)
+  (:import-from :Lunette.VirtualKeys
+                #:VK_HOME
+                #:VK_END
+                #:VK_LEFT
+                #:VK_RIGHT
+                #:VK_UP
+                #:VK_DOWN
+                #:VK_RETURN
+                #:VK_SPACE)
+  (:import-from :Lunette.Graphics
+                #:RECT
+                #:left
+                #:top
+                #:right
+                #:bottom
+
+                #:MoveToEx
+                #:LineTo
+                #:Rectangle
+                #:InvalidateRect)
+  (:import-from :Lunette.Windows
+                #:MB_OK
+                #:MK_LBUTTON
+
+                #:GetClientRect
+                #:ShowCursor
+                #:GetCursorPos
+                #:SetCursorPos
+                #:ScreenToClient
+                #:ClientToScreen)
+  (:export #:winmain))
