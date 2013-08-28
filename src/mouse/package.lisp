@@ -43,3 +43,33 @@
                 #:SetCursor
                 #:ShowCursor)
   (:export #:winmain))
+
+(defpackage :Lunette.Examples.checker1
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:hiword
+                #:loword)
+  (:import-from :Lunette.Errors
+                #:MessageBeep)
+  (:import-from :Lunette.Messages
+                #:WM_SIZE
+                #:WM_CREATE
+                #:WM_LBUTTONDOWN)
+  (:import-from :Lunette.Graphics
+                #:RECT
+                #:left
+                #:top
+                #:right
+                #:bottom
+
+                #:MoveToEx
+                #:LineTo
+                #:Rectangle
+                #:InvalidateRect)
+  (:import-from :Lunette.Windows
+                #:MB_OK
+
+                #:GetClientRect)
+  (:export #:winmain))

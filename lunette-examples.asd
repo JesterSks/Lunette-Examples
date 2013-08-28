@@ -51,4 +51,5 @@
    (:module "src/mouse"
             :components
             ((:file "package")
-             (:file "connect" :depends-on ("package"))))))
+             (:file "connect" :depends-on ("package"))
+             (:file "checker1" :depends-on ("package"))))))
