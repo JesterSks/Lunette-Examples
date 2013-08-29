@@ -128,3 +128,38 @@
                 #:ScreenToClient
                 #:ClientToScreen)
   (:export #:winmain))
+
+(defpackage :Lunette.Examples.checker3
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:hiword
+                #:loword)
+  (:import-from :Lunette.Errors
+                #:MessageBeep)
+  (:import-from :Lunette.Messages
+                #:WM_SIZE
+                #:WM_CREATE
+                #:WM_LBUTTONDOWN)
+  (:import-from :Lunette.Graphics
+                #:RECT
+                #:left
+                #:top
+                #:right
+                #:bottom
+
+                #:MoveToEx
+                #:LineTo
+                #:Rectangle
+                #:InvalidateRect)
+  (:import-from :Lunette.Windows
+                #:WS_CHILDWINDOW
+                #:WS_VISIBLE
+                #:MB_OK
+
+                #:GetClientRect
+                #:MoveWindow
+                #:SetWindowLong
+                #:GetWindowLong)
+  (:export #:winmain))
