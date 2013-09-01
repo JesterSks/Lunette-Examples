@@ -163,3 +163,73 @@
                 #:SetWindowLong
                 #:GetWindowLong)
   (:export #:winmain))
+
+
+
+(defpackage :Lunette.Examples.checker4
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:POINT
+                #:x
+                #:y
+
+                #:hiword
+                #:loword)
+  (:import-from :Lunette.Errors
+                #:MessageBeep)
+  (:import-from :Lunette.Messages
+                #:WM_SIZE
+                #:WM_CREATE
+                #:WM_LBUTTONDOWN
+                #:WM_SETFOCUS
+                #:WM_KILLFOCUS
+                #:WM_KEYDOWN
+
+                #:SendMessage)
+  (:import-from :Lunette.VirtualKeys
+                #:VK_HOME
+                #:VK_END
+                #:VK_LEFT
+                #:VK_RIGHT
+                #:VK_UP
+                #:VK_DOWN
+                #:VK_RETURN
+                #:VK_SPACE)
+  (:import-from :Lunette.Dialogs
+                #:GetDlgItem)
+  (:import-from :Lunette.Graphics
+                #:NULL_BRUSH
+                #:BLACK_PEN
+                #:PS_DASH
+
+                #:RECT
+                #:left
+                #:top
+                #:right
+                #:bottom
+
+                #:SelectObject
+                #:GetStockObject
+                #:CreatePen
+                #:DeleteObject
+                #:MoveToEx
+                #:LineTo
+                #:Rectangle
+                #:InvalidateRect)
+  (:import-from :Lunette.Windows
+                #:WS_CHILDWINDOW
+                #:WS_VISIBLE
+                #:MB_OK
+                #:MK_LBUTTON
+                #:GWL_ID
+
+                #:GetClientRect
+                #:SetFocus
+                #:GetFocus
+                #:MoveWindow
+                #:GetWindowLong
+                #:SetWindowLong
+                #:GetParent)
+  (:export #:winmain))
