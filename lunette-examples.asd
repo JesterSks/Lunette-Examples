@@ -51,8 +51,9 @@
    (:module "src/mouse"
             :components
             ((:file "package")
-             (:file "connect" :depends-on ("package"))
+             (:file "connect"  :depends-on ("package"))
              (:file "checker1" :depends-on ("package"))
              (:file "checker2" :depends-on ("package"))
              (:file "checker3" :depends-on ("package"))
-             (:file "checker4" :depends-on ("package"))))))
+             (:file "checker4" :depends-on ("package"))
+             (:file "blokout1" :depends-on ("package"))))))

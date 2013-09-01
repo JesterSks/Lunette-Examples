@@ -164,8 +164,6 @@
                 #:GetWindowLong)
   (:export #:winmain))
 
-
-
 (defpackage :Lunette.Examples.checker4
   (:use #:common-lisp
         #:cffi
@@ -232,4 +230,38 @@
                 #:GetWindowLong
                 #:SetWindowLong
                 #:GetParent)
+  (:export #:winmain))
+
+(defpackage :Lunette.Examples.blokout1
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:hiword
+                #:loword)
+  (:import-from :Lunette.Messages
+                #:WM_LBUTTONDOWN
+                #:WM_MOUSEMOVE
+                #:WM_LBUTTONUP
+                #:WM_CHAR
+
+                #:SendMessage)
+  (:import-from :Lunette.Resources
+                #:IDC_CROSS
+                #:IDC_ARROW
+
+                #:LoadCursor)
+  (:import-from :Lunette.Graphics
+                #:NULL_BRUSH
+                #:BLACK_BRUSH
+                #:R2_NOT
+
+                #:with-dc
+                #:SetROP2
+                #:SelectObject
+                #:GetStockObject
+                #:Rectangle
+                #:InvalidateRect)
+  (:import-from :Lunette.Windows
+                #:SetCursor)
   (:export #:winmain))
