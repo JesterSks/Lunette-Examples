@@ -56,4 +56,5 @@
              (:file "checker2" :depends-on ("package"))
              (:file "checker3" :depends-on ("package"))
              (:file "checker4" :depends-on ("package"))
-             (:file "blokout1" :depends-on ("package"))))))
+             (:file "blokout1" :depends-on ("package"))
+             (:file "blokout2" :depends-on ("package"))))))
