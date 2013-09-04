@@ -29,7 +29,7 @@
 
 (defconstant title (format nil "~16@<~A~>~13@<~A~>~9@<~A~>" "message" "wParam" "lParam"))
 (defconstant titleLines (format nil "~16@<~A~>~13@<~A~>~9@<~A~>" "_______" "______" "______"))
-(defconstant lineFormat "~16@<~A~>~13@<~4,'0,,:X-~4,'0,,:X~>~9@<~4,'0,,:X-~4,'0,,:X~>")
+(defconstant lineFormat "~16@<~A~>~13@<~4,'0X-~4,'0X~>~9@<~4,'0X-~4,'0X~>")
 
 (defparameter hwndButton (make-array 10 :initial-element nil))
 (defparameter listRect nil)
