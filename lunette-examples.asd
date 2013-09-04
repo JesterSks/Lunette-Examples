@@ -57,4 +57,8 @@
              (:file "checker3" :depends-on ("package"))
              (:file "checker4" :depends-on ("package"))
              (:file "blokout1" :depends-on ("package"))
-             (:file "blokout2" :depends-on ("package"))))))
+             (:file "blokout2" :depends-on ("package"))))
+   (:module "src/controls"
+            :components
+            ((:file "package")
+             (:file "btnlook" :depends-on ("package"))))))
