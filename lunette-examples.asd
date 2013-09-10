@@ -61,4 +61,5 @@
    (:module "src/controls"
             :components
             ((:file "package")
-             (:file "btnlook" :depends-on ("package"))))))
+             (:file "btnlook"  :depends-on ("package"))
+             (:file "btnlook1" :depends-on ("package"))))))

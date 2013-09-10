@@ -65,3 +65,61 @@
                 #:GetClientRect
                 #:ValidateRect)
     (:export #:winmain))
+
+(defpackage :Lunette.Examples.btnlook1
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:loword
+                #:hiword)
+  (:import-from :Lunette.Graphics
+                #:SYSTEM_FIXED_FONT
+                #:TRANSPARENT
+                #:COLOR_BTNFACE
+                #:COLOR_WINDOWTEXT
+
+                #:RECT
+                #:left
+                #:top
+                #:right
+                #:bottom
+
+                #:GetStockObject
+                #:SelectObject
+                #:SetBkMode
+                #:InvalidateRect
+                #:with-dc
+                #:GetSysColor
+                #:SetBkColor)
+  (:import-from :Lunette.Controls
+                #:BS_PUSHBUTTON
+                #:BS_DEFPUSHBUTTON
+                #:BS_CHECKBOX
+                #:BS_AUTOCHECKBOX
+                #:BS_RADIOBUTTON
+                #:BS_3STATE
+                #:BS_AUTO3STATE
+                #:BS_GROUPBOX
+                #:BS_AUTORADIOBUTTON
+                #:BS_OWNERDRAW
+
+                #:ScrollWindow)
+  (:import-from :Lunette.Messages
+                #:WM_SIZE
+                #:WM_CREATE
+                #:WM_DRAWITEM
+                #:WM_COMMAND
+                #:WM_SYSCOLORCHANGE)
+  (:import-from :Lunette.Dialogs
+                #:GetDialogBaseUnits)
+  (:import-from :Lunette.Graphics.Text
+                #:text-out
+                #:SetTextColor)
+  (:import-from :Lunette.Windows
+                #:WS_CHILD
+                #:WS_VISIBLE
+
+                #:GetClientRect
+                #:ValidateRect)
+    (:export #:winmain))
