@@ -123,3 +123,62 @@
                 #:GetClientRect
                 #:ValidateRect)
     (:export #:winmain))
+
+(defpackage :Lunette.Examples.owndraw
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:POINT
+                #:X
+                #:Y
+
+                #:loword
+                #:hiword)
+  (:import-from :Lunette.Graphics
+                #:WHITE_BRUSH
+                #:BLACK_BRUSH
+                #:ODS_SELECTED
+                #:ODS_FOCUS
+
+                #:DRAWITEMSTRUCT
+                #:CtlID
+                #:itemState
+                #:hDC
+                #:rcItem
+
+                #:RECT
+                #:left
+                #:top
+                #:right
+                #:bottom
+
+                #:GetStockObject
+                #:SelectObject
+                #:InvalidateRect
+                #:FillRect
+                #:FrameRect
+                #:Polygon
+                #:DrawFocusRect
+                #:InvertRect)
+  (:import-from :Lunette.Controls
+                #:BS_OWNERDRAW)
+  (:import-from :Lunette.Messages
+                #:WM_SIZE
+                #:WM_CREATE
+                #:WM_DRAWITEM
+                #:WM_COMMAND)
+  (:import-from :Lunette.Dialogs
+                #:GetDialogBaseUnits)
+  (:import-from :Lunette.Graphics.Text
+                #:text-out
+                #:SetTextColor)
+  (:import-from :Lunette.Windows
+                #:WS_CHILD
+                #:WS_VISIBLE
+
+                #:GetClientRect
+                #:ValidateRect
+                #:MoveWindow
+                #:GetWindowRect)
+    (:export #:winmain))
