@@ -63,4 +63,5 @@
             ((:file "package")
              (:file "btnlook"  :depends-on ("package"))
              (:file "btnlook1" :depends-on ("package"))
-             (:file "owndraw"  :depends-on ("package"))))))
+             (:file "owndraw"  :depends-on ("package"))
+             (:file "colors1"  :depends-on ("package"))))))

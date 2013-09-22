@@ -182,3 +182,85 @@
                 #:MoveWindow
                 #:GetWindowRect)
     (:export #:winmain))
+
+(defpackage :Lunette.Examples.colors1
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:loword
+                #:hiword)
+  (:import-from :Lunette.VirtualKeys
+                #:VK_TAB
+                #:VK_SHIFT)
+  (:import-from :Lunette.Graphics
+                #:WHITE_BRUSH
+                #:COLOR_BTNHIGHLIGHT
+
+                #:RECT
+                #:left
+                #:top
+                #:right
+                #:bottom
+
+                #:CreateSolidBrush
+                #:GetStockObject
+                #:DeleteObject
+                #:InvalidateRect
+                #:GetSysColor
+                #:SetBkColor
+                #:rgb
+                #:SetRect)
+  (:import-from :Lunette.Controls
+                #:SB_PAGEDOWN
+                #:SB_LINEDOWN
+                #:SB_PAGEUP
+                #:SB_LINEUP
+                #:SB_TOP
+                #:SB_BOTTOM
+                #:SB_THUMBPOSITION
+                #:SB_THUMBTRACK
+
+                #:SB_CTL
+
+                #:SBS_VERT
+
+                #:SS_CENTER
+                #:SS_WHITERECT
+
+                #:SetScrollRange
+                #:SetScrollPos)
+  (:import-from :Lunette.Messages
+                #:WM_SIZE
+                #:WM_CREATE
+                #:WM_SETFOCUS
+                #:WM_CTLCOLORSCROLLBAR
+                #:WM_CTLCOLORSTATIC
+                #:WM_KEYDOWN
+                #:WM_VSCROLL
+                #:WM_SYSCOLORCHANGE)
+  (:import-from :Lunette.Dialogs
+                #:GetDialogBaseUnits
+                #:GetDlgItem)
+  (:import-from :Lunette.Graphics.Text
+                #:SetTextColor)
+  (:import-from :Lunette.Windows
+                #:WS_CHILD
+                #:WS_VISIBLE
+                #:GWL_ID
+                #:GWL_HINSTANCE
+                #:GWL_WNDPROC
+                #:WS_TABSTOP
+                #:GCL_HBRBACKGROUND
+
+                #:MoveWindow
+                #:GetWindowLong
+                #:SetWindowLong
+                #:SetWindowText
+                #:SetClassLong
+                #:GetParent
+                #:GetKeyState
+                #:SetFocus
+                #:CallWindowProc
+                #:GetClientRect)
+    (:export #:winmain))
