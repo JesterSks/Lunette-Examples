@@ -45,8 +45,8 @@
     (cond
      ((eql msg WM_KEYDOWN)
       (when (= wparam VK_TAB)
-        (SetFocus (GetDlgItem (GetParent hwnd)
-                              (+ id (mod (if (< 0 (GetKeyState VK_SHIFT)) 2 1) 3))))))
+        (let ((childId (mod (+ id (if (> 0 (GetKeyState VK_SHIFT)) 2 1)) 3)))
+          (SetFocus (GetDlgItem (GetParent hwnd) childId)))))
      ((eql msg WM_SETFOCUS)
       (setf idFocus id)))
 
