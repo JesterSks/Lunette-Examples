@@ -26,17 +26,30 @@
   (let ((pVarBlock (GetEnvironmentStrings)))
     (unwind-protect
         (loop with ptr = pVarBlock
-              until (eql (mem-ref ptr :ushort) #\Null)
+              until (eql #\Null (code-char (mem-ref ptr :ushort)))
               do (multiple-value-bind (str byte-count) (foreign-string-to-lisp ptr)
-                   (unless (eql (aref str 0) #\=)
+                   (unless (or (= 0 byte-count)
+                               (eql (aref str 0) #\=))
                      (let ((splitPos (position #\= str)))
                        (when splitPos
                          (let ((varName (subseq str 0 splitPos)))
-
-                           )))
-                     )
+                           (with-foreign-string (cstr varName)
+                                                (SendMessage hwndList LB_ADDSTRING 0 (pointer-address cstr)))))))
                    (incf-pointer ptr (+ 2 byte-count))))
       (FreeEnvironmentStrings pVarBlock))))
+
+(defun get-current-selection (hwndList)
+  (let* ((iIndex (SendMessage hwndList LB_GETCURSEL 0 0))
+         (iLength (SendMessage hwndList LB_GETTEXTLEN iIndex 0)))
+    (with-foreign-pointer-as-string (pVarName (1+ iLength))
+                                    (SendMessage hwndList LB_GETTEXT
+                                                 iIndex (pointer-address pVarName)))))
+
+(defun get-environment-variable (pVarName)
+  (with-foreign-string (cstr pVarName)
+                       (let ((iLength (GetEnvironmentVariable cstr (null-pointer) 0)))
+                         (with-foreign-pointer-as-string (pVarValue iLength)
+                                                         (GetEnvironmentVariable cstr pVarValue iLength)))))
 
 (defcallback WindowFunc LRESULT ((hWnd HWND)
                                  (msg :UINT)
@@ -45,12 +58,44 @@
   (cond
    ((eql msg WM_CREATE)
     (let ((cyChar (hiword (GetDialogBaseUnits)))
-          (cxChar (loword (GetDialogBaseUnits)))))
+          (cxChar (loword (GetDialogBaseUnits))))
+      (setf hwndList (create-window-ex "listbox" ""
+                                       :dwStyle (logior WS_CHILD WS_VISIBLE LBS_STANDARD)
+                                       :x cxChar
+                                       :y (* 3 cyChar)
+                                       :nWidth (+ (* cxChar 16) (GetSystemMetrics SM_CXVSCROLL))
+                                       :nHeight (* cyChar 5)
+                                       :hWndParent hwnd
+                                       :hMenu (make-pointer ID_LIST))
+            hwndText (create-window-ex "static" ""
+                                       :dwStyle (logior WS_CHILD WS_VISIBLE SS_LEFT)
+                                       :x cxChar
+                                       :y cyChar
+                                       :nWidth (GetSystemMetrics SM_CXSCREEN)
+                                       :nHeight cyChar
+                                       :hWndParent hwnd
+                                       :hMenu (make-pointer ID_TEXT)))
+
+      (FillListBox hwndList))
     0)
    ((eql msg WM_SETFOCUS)
     (SetFocus hwndList)
     0)
    ((eql msg WM_COMMAND)
+    (when (and (= (loword wParam) ID_LIST)
+               (= (hiword wParam) LBN_SELCHANGE))
+      (let ((pVarName (get-current-selection hwndList)))
+        (with-foreign-string (cstr pVarName)
+                             (SetWindowText hwndText cstr)))
+
+;;;      (let* ((pVarName (get-current-selection hwndList))
+;;;             (pVarValue (get-environment-variable pVarName)))
+;;;        (format t "~A~%" pVarName)
+;;;        (with-foreign-string (cstr pVarValue)
+;;;                             (format t "~A~%" pVarValue)
+;;;                             (SetWindowText hwndText cstr)))
+)
+
     0)
    ((eql msg WM_DESTROY)
     (PostQuitMessage 0)
@@ -62,19 +107,15 @@
 
   (register-class "EnvironWin" :lpfnWndProc (callback WindowFunc))
 
-  (setf rcColor (foreign-alloc 'RECT))
+  (let ((hwnd (create-window-ex "EnvironWin" "Environment List Box")))
+    (ShowWindow hwnd SW_SHOW)
+    (ShowWindow hwnd SW_SHOW)
+    (UpdateWindow hwnd)
 
-  (unwind-protect
-      (let ((hwnd (create-window-ex "EnvironWin" "Environment List Box")))
-        (ShowWindow hwnd SW_SHOW)
-        (ShowWindow hwnd SW_SHOW)
-        (UpdateWindow hwnd)
-
-        (with-foreign-object (msg 'MSG)
-                             (loop with result
-                                   while (not (= 0 (setf result (GetMessage MSG (null-pointer) 0 0))))
-                                   do (progn
-                                        (TranslateMessage msg)
-                                        (DispatchMessage msg)))
-                             (foreign-slot-value msg 'MSG 'wParam)))
-    (foreign-free rcColor)))
+    (with-foreign-object (msg 'MSG)
+                         (loop with result
+                               while (not (= 0 (setf result (GetMessage MSG (null-pointer) 0 0))))
+                               do (progn
+                                    (TranslateMessage msg)
+                                    (DispatchMessage msg)))
+                         (foreign-slot-value msg 'MSG 'wParam))))

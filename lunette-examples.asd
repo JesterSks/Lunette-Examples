@@ -64,7 +64,8 @@
              (:file "btnlook"  :depends-on ("package"))
              (:file "btnlook1" :depends-on ("package"))
              (:file "owndraw"  :depends-on ("package"))
-             (:file "colors1"  :depends-on ("package"))))
+             (:file "colors1"  :depends-on ("package"))
+             (:file "environ"  :depends-on ("package"))))
    (:module "src/poppad"
             :components
             ((:file "package")

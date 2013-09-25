@@ -264,3 +264,45 @@
                 #:CallWindowProc
                 #:GetClientRect)
     (:export #:winmain))
+
+(defpackage :Lunette.Examples.environ
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:SM_CXVSCROLL
+                #:SM_CXSCREEN
+
+                #:GetEnvironmentStrings
+                #:GetEnvironmentVariable
+                #:FreeEnvironmentStrings
+                #:GetSystemMetrics
+
+                #:loword
+                #:hiword)
+  (:import-from :Lunette.Controls
+                #:LBS_STANDARD
+
+                #:LBN_SELCHANGE
+
+                #:LB_GETCURSEL
+                #:LB_GETTEXTLEN
+                #:LB_GETTEXT
+                #:LB_ADDSTRING
+
+                #:SS_LEFT)
+  (:import-from :Lunette.Messages
+                #:WM_CREATE
+                #:WM_SETFOCUS
+                #:WM_COMMAND
+
+                #:SendMessage)
+  (:import-from :Lunette.Dialogs
+                #:GetDialogBaseUnits)
+  (:import-from :Lunette.Windows
+                #:WS_CHILD
+                #:WS_VISIBLE
+
+                #:SetWindowText
+                #:SetFocus)
+    (:export #:winmain))
