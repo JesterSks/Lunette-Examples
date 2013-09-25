@@ -29,7 +29,11 @@
               until (eql (mem-ref ptr :ushort) #\Null)
               do (multiple-value-bind (str byte-count) (foreign-string-to-lisp ptr)
                    (unless (eql (aref str 0) #\=)
+                     (let ((splitPos (position #\= str)))
+                       (when splitPos
+                         (let ((varName (subseq str 0 splitPos)))
 
+                           )))
                      )
                    (incf-pointer ptr (+ 2 byte-count))))
       (FreeEnvironmentStrings pVarBlock))))
