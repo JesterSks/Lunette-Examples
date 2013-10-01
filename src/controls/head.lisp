@@ -34,40 +34,50 @@
 (defparameter szFile nil)
 (defparameter buffer nil)
 
-(defun FillListBox (hwndList)
-  (let ((pVarBlock (GetEnvironmentStrings)))
-    (unwind-protect
-        (loop with ptr = pVarBlock
-              until (eql #\Null (code-char (mem-ref ptr :ushort)))
-              do (multiple-value-bind (str byte-count) (foreign-string-to-lisp ptr)
-                   (unless (or (= 0 byte-count)
-                               (eql (aref str 0) #\=))
-                     (let ((splitPos (position #\= str)))
-                       (when splitPos
-                         (let ((varName (subseq str 0 splitPos)))
-                           (with-foreign-string (cstr varName)
-                                                (SendMessage hwndList LB_ADDSTRING 0 (pointer-address cstr)))))))
-                   (incf-pointer ptr (+ 2 byte-count))))
-      (FreeEnvironmentStrings pVarBlock))))
-
-(defun get-current-selection (hwndList)
-  (let* ((iIndex (SendMessage hwndList LB_GETCURSEL 0 0))
-         (iLength (SendMessage hwndList LB_GETTEXTLEN iIndex 0)))
-    (with-foreign-pointer-as-string (pVarName (* 2 (1+ iLength)))
-                                    (SendMessage hwndList LB_GETTEXT
-                                                 iIndex (pointer-address pVarName)))))
-
-(defun get-environment-variable (pVarName)
-  (with-foreign-string (cstr pVarName)
-                       (let ((iLength (GetEnvironmentVariable cstr (null-pointer) 0)))
-                         (with-foreign-pointer-as-string (pVarValue (* 2 iLength))
-                                                         (GetEnvironmentVariable cstr pVarValue iLength)))))
-
 (defcallback ListProc LRESULT ((hWnd HWND)
                                (msg :UINT)
                                (wparam WPARAM)
                                (lparam LPARAM))
-  )
+  (when (and (eql msg WM_KEYDOWN)
+             (= wParam VK_RETURN))
+    (SendMessage (GetParent hwnd) WM_COMMAND (makelong 1 LBN_DBLCLK) (pointer-address hwnd)))
+
+  (CallWindowProc OldList hwnd msg wParam lParam))
+
+(defun get-current-selection (hwndList)
+  (let ((i (SendMessage hwndList LB_GETCURSEL 0 0)))
+    (unless (= i LB_ERR)
+      (let ((iLength (SendMessage hwndList LB_GETTEXTLEN i 0)))
+        (with-foreign-pointer-as-string (pVarName (* 2 (1+ iLength)))
+                                        (SendMessage hwndList LB_GETTEXT
+                                                     iIndex (pointer-address pVarName)))))))
+
+(defun valid-file? (filename)
+  (with-foreign-string (cfilename filename)
+                       (let ((hFile (CreateFile cfilename GENERIC_READ FILE_SHARED_READ
+                                                (null-pointer) OPEN_EXISTING 0
+                                                (null-pointer))))
+                         (unless (= INVALID_HANDLE_VALUE hFile)
+                           (CloseHandle hFile)
+                           filename))))
+
+(defun make-full-path (filename)
+  (let ((curDir (with-foreign-pointer-as-string (cbuffer (* 2 (1+ MAX_PATH)))
+                                                (GetCurrentDirectory (1+ MAX_PATH) cbuffer))))
+    (if (eql #\\ (aref curDir (1- (length curDir))))
+        (format nil "~A~A" curDir filename)
+      (format nil "~A\\~A" curDir filename))))
+
+(defun win32-read-file (filename)
+  (with-foreign-string (cFile filename)
+                       (let ((hFile (CreateFile cFile GENERIC_READ FILE_SHARED_READ
+                                                (null-pointer) OPEN_EXISTING 0
+                                                (null-pointer))))
+                         (unless (= INVALID_HANDLE_VALUE hFile)
+                           (with-foreign-pointer-as-string (cbuffer MAXREAD :encoding :ascii)
+                                                           (with-foreign-object (i 'DWORD)
+                                                                                (ReadFile hFile cbuffer MAXREAD i (null-pointer))
+                                                                                (CloseHandle hFile)))))))
 
 (defcallback WindowFunc LRESULT ((hWnd HWND)
                                  (msg :UINT)
@@ -101,7 +111,7 @@
                                          :hWndParent hwnd
                                          :hMenu (make-pointer ID_TEXT)))))
 
-    (setf OldList (SetWindowLong hwndList GWL_WNDPROD (pointer-address (callback ListProc))))
+    (setf OldList (make-pointer (SetWindowLong hwndList GWL_WNDPROD (pointer-address (callback ListProc)))))
     (with-foreign-string (cstr "*.*")
                          (SendMessage hwndList LB_DIR DIRATTR (pointer-address cstr)))
     0)
@@ -113,38 +123,40 @@
     (SetFocus hwndList)
     0)
    ((eql msg WM_COMMAND)
-    (block nil
-      (when (and (= (loword wParam) ID_LIST)
-                 (= (hiword wParam) LBN_DBLCLK))
-        (let ((i (SendMessage hwndList LB_GETCURSEL 0 0)))
-          (when (= i LB_ERR)
-            (return))
-
-          (with-foreign-pointer-as-string (cbuffer (* 2 (1+ MAX_PATH)))
-                                          (SendMessage hwndList LB_GETTEXT i (pointer-address cbuffer))
-                                          (let ((hFile (CreateFile cbuffer GENERIC_READ FILE_SHARED_READ
-                                                                   (null-pointer) OPEN_EXISTING 0
-                                                                   (null-pointer))))
-                                            (if (not (= INVALID_HANDLE_VALUE hFile))
-                                                (progn
-                                                  (CloseHandle hFile)
-                                                  (setf bValidFile t
-                                                        szFile (foreign-string-to-lisp cbuffer))
-                                                  (GetCurrentDirectory (1+ max_path) cbuffer)
-                                                  (let ((strDir (foreign-string-to-lisp cbuffer)))
-                                                    (unless (eql #\\ (aref strDir (1- (length strDir))))
-                                                      (strDir (format nil "~A\\" strDir)))
-                                                    (with-foreign-string (cTitle (concatenate 'string strDir szFile))
-                                                                         (SetWindowText hwndText cTitle))))
-                                              (progn
-                                                (setf bValidFile nil)
-                                                )))
-           ))
-        (let* ((pVarName (get-current-selection hwndList))
-               (pVarValue (get-environment-variable pVarName)))
-          (with-foreign-string (cstr pVarValue)
-                               (SetWindowText hwndText cstr)))))
+    (when (and (= (loword wParam) ID_LIST)
+               (= (hiword wParam) LBN_DBLCLK))
+      (let ((selStr (get-current-selection hwndList)))
+        (when selStr
+          (if (valid-file? selStr)
+              (with-foreign-string (cTitle (make-full-path selStr))
+                                   (setf bValidFile t
+                                         szFile selStr)
+                                   (SetWindowText hwndText cTitle))
+            (progn
+              (setf bValidFile nil)
+              (with-foreign-string (cName selStr)
+                                   (unless (= 0 (SetCurrentDirectory cName))
+                                     (with-foreign-string (cDrive (format nil "~A:" selStr))
+                                                          (SetCurrentDirectory cDrive))))
+              (with-foreign-pointer-as-string (szBuffer (* 2 (1+ MAX_PATH)))
+                                              (GetCurrentDirectory (1+ MAX_PATH) szBuffer)
+                                              (SetWindowText hwndText szBuffer))
+              (SendMessage hwndList LB_RESETCONTENT 0 0)
+              (with-foreign-string (cStr "*.*")
+                                   (SendMessage hwndList LB_DIR DIRATTR cStr))))
+          (InvalidateRect hwnd (null-pointer) 1))))
     (InvalidateRect hwnd (null-pointer) 1)
+    0)
+   ((eql msg WM_PAINT)
+    (when bValidFile
+      (let ((contents (win32-read-file szFile)))
+        (when contents
+          (with-ps ps hdc hWnd
+                   (SelectObject hdc (GetStockObject SYSTEM_FIXED_FONT))
+                   (SetTextColor hdc (GetSysColor COLOR_BTNTEXT))
+                   (SetBkColor   hdc (GetSysColor COLOR_BTNFACE))
+
+                   (draw-text hdc contents (length contents) rect DTFLAGS)))))
     0)
    ((eql msg WM_DESTROY)
     (PostQuitMessage 0)

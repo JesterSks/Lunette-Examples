@@ -306,3 +306,67 @@
                 #:SetWindowText
                 #:SetFocus)
     (:export #:winmain))
+
+(defpackage :Lunette.Examples.head
+  (:use #:common-lisp
+        #:cffi
+        #:Lunette)
+  (:import-from :Lunette.System
+                #:SM_CXVSCROLL
+
+                #:GetSystemMetrics
+
+                #:makelong
+                #:loword
+                #:hiword)
+  (:import-from :Lunette.Files
+                #:GENERIC_READ
+                #:FILE_SHARED_READ
+                #:OPEN_EXISTING
+
+                DDL_READWRITE
+                DDL_READONLY
+                DDL_HIDDEN
+                DDL_SYSTEM
+                DDL_DIRECTORY
+                DDL_ARCHIVE
+                DDL_DRIVES
+
+                #:GetCurrentDirectory
+                #:SetCurrentDirectory
+                #:CreateFile
+                #:ReadFile)
+  (:import-from :Lunette.Controls
+                #:LBS_STANDARD
+
+                #:LB_GETCURSEL
+                #:LB_GETTEXTLEN
+                #:LB_GETTEXT
+                #:LB_DIR
+
+                #:SS_LEFT)
+  (:import-from :Lunette.Messages
+                #:WM_CREATE
+                #:WM_SIZE
+                #:WM_SETFOCUS
+                #:WM_COMMAND
+
+                #:SendMessage)
+  (:import-from :Lunette.Dialogs
+                #:GetDialogBaseUnits)
+  (:import-from :Lunette.Windows
+                #:WS_CHILD
+                #:WS_VISIBLE
+
+                #:SetWindowText
+                #:SetFocus)
+  (:import-from :Lunette.Graphics
+                #:with-ps)
+  (:import-from :Lunette.Graphics.Text
+                #:DT_WORDBREAK
+                #:DT_EXPANDTABS
+                #:DT_NOCLIP
+                #:DT_NOPREFIX
+
+                #:DrawText)
+    (:export #:winmain))
