@@ -312,6 +312,7 @@
         #:cffi
         #:Lunette)
   (:import-from :Lunette.System
+                #:DWORD
                 #:SM_CXVSCROLL
 
                 #:GetSystemMetrics
@@ -319,18 +320,13 @@
                 #:makelong
                 #:loword
                 #:hiword)
+  (:import-from :Lunette.VirtualKeys
+                #:VK_RETURN)
   (:import-from :Lunette.Files
                 #:GENERIC_READ
-                #:FILE_SHARED_READ
+                #:FILE_SHARE_READ
                 #:OPEN_EXISTING
-
-                DDL_READWRITE
-                DDL_READONLY
-                DDL_HIDDEN
-                DDL_SYSTEM
-                DDL_DIRECTORY
-                DDL_ARCHIVE
-                DDL_DRIVES
+                #:MAX_PATH
 
                 #:GetCurrentDirectory
                 #:SetCurrentDirectory
@@ -338,6 +334,16 @@
                 #:ReadFile)
   (:import-from :Lunette.Controls
                 #:LBS_STANDARD
+
+                #:LBN_DBLCLK
+
+                #:DDL_READWRITE
+                #:DDL_READONLY
+                #:DDL_HIDDEN
+                #:DDL_SYSTEM
+                #:DDL_DIRECTORY
+                #:DDL_ARCHIVE
+                #:DDL_DRIVES
 
                 #:LB_GETCURSEL
                 #:LB_GETTEXTLEN
@@ -350,6 +356,7 @@
                 #:WM_SIZE
                 #:WM_SETFOCUS
                 #:WM_COMMAND
+                #:WM_KEYDOWN
 
                 #:SendMessage)
   (:import-from :Lunette.Dialogs
@@ -357,11 +364,21 @@
   (:import-from :Lunette.Windows
                 #:WS_CHILD
                 #:WS_VISIBLE
+                #:GWL_WNDPROC
 
                 #:SetWindowText
-                #:SetFocus)
+                #:SetWindowLong
+                #:SetFocus
+                #:CallWindowProc)
   (:import-from :Lunette.Graphics
-                #:with-ps)
+                #:RECT
+                #:left
+                #:top
+                #:right
+                #:bottom
+
+                #:with-ps
+                #:InvalidateRect)
   (:import-from :Lunette.Graphics.Text
                 #:DT_WORDBREAK
                 #:DT_EXPANDTABS

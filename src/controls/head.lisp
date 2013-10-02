@@ -111,7 +111,7 @@
                                          :hWndParent hwnd
                                          :hMenu (make-pointer ID_TEXT)))))
 
-    (setf OldList (make-pointer (SetWindowLong hwndList GWL_WNDPROD (pointer-address (callback ListProc)))))
+    (setf OldList (make-pointer (SetWindowLong hwndList GWL_WNDPROC (pointer-address (callback ListProc)))))
     (with-foreign-string (cstr "*.*")
                          (SendMessage hwndList LB_DIR DIRATTR (pointer-address cstr)))
     0)
