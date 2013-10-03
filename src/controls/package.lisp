@@ -316,6 +316,7 @@
                 #:SM_CXVSCROLL
 
                 #:GetSystemMetrics
+                #:CloseHandle
 
                 #:makelong
                 #:loword
@@ -327,6 +328,7 @@
                 #:FILE_SHARE_READ
                 #:OPEN_EXISTING
                 #:MAX_PATH
+                #:INVALID_HANDLE_VALUE
 
                 #:GetCurrentDirectory
                 #:SetCurrentDirectory
@@ -349,6 +351,9 @@
                 #:LB_GETTEXTLEN
                 #:LB_GETTEXT
                 #:LB_DIR
+                #:LB_RESETCONTENT
+
+                #:LB_ERR
 
                 #:SS_LEFT)
   (:import-from :Lunette.Messages
@@ -369,8 +374,13 @@
                 #:SetWindowText
                 #:SetWindowLong
                 #:SetFocus
+                #:GetParent
                 #:CallWindowProc)
   (:import-from :Lunette.Graphics
+                #:COLOR_BTNTEXT
+                #:COLOR_BTNFACE
+                #:SYSTEM_FIXED_FONT
+
                 #:RECT
                 #:left
                 #:top
@@ -378,12 +388,17 @@
                 #:bottom
 
                 #:with-ps
-                #:InvalidateRect)
+                #:GetStockObject
+                #:SelectObject
+                #:SetBkColor
+                #:InvalidateRect
+                #:GetSysColor)
   (:import-from :Lunette.Graphics.Text
                 #:DT_WORDBREAK
                 #:DT_EXPANDTABS
                 #:DT_NOCLIP
                 #:DT_NOPREFIX
 
-                #:DrawText)
+                #:SetTextColor
+                #:draw-text)
     (:export #:winmain))

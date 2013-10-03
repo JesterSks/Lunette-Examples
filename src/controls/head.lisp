@@ -50,14 +50,14 @@
       (let ((iLength (SendMessage hwndList LB_GETTEXTLEN i 0)))
         (with-foreign-pointer-as-string (pVarName (* 2 (1+ iLength)))
                                         (SendMessage hwndList LB_GETTEXT
-                                                     iIndex (pointer-address pVarName)))))))
+                                                     i (pointer-address pVarName)))))))
 
 (defun valid-file? (filename)
   (with-foreign-string (cfilename filename)
-                       (let ((hFile (CreateFile cfilename GENERIC_READ FILE_SHARED_READ
+                       (let ((hFile (CreateFile cfilename GENERIC_READ FILE_SHARE_READ
                                                 (null-pointer) OPEN_EXISTING 0
                                                 (null-pointer))))
-                         (unless (= INVALID_HANDLE_VALUE hFile)
+                         (unless (pointer-eq INVALID_HANDLE_VALUE hFile)
                            (CloseHandle hFile)
                            filename))))
 
@@ -69,15 +69,10 @@
       (format nil "~A\\~A" curDir filename))))
 
 (defun win32-read-file (filename)
-  (with-foreign-string (cFile filename)
-                       (let ((hFile (CreateFile cFile GENERIC_READ FILE_SHARED_READ
-                                                (null-pointer) OPEN_EXISTING 0
-                                                (null-pointer))))
-                         (unless (= INVALID_HANDLE_VALUE hFile)
-                           (with-foreign-pointer-as-string (cbuffer MAXREAD :encoding :ascii)
-                                                           (with-foreign-object (i 'DWORD)
-                                                                                (ReadFile hFile cbuffer MAXREAD i (null-pointer))
-                                                                                (CloseHandle hFile)))))))
+  (let ((str (make-string MAXREAD)))
+    (with-open-file (f filename)
+                    (read-sequence str f))
+    str))
 
 (defcallback WindowFunc LRESULT ((hWnd HWND)
                                  (msg :UINT)
@@ -134,16 +129,28 @@
                                    (SetWindowText hwndText cTitle))
             (progn
               (setf bValidFile nil)
+              (format t "Selected Item: ~A~%" selStr)
               (with-foreign-string (cName selStr)
-                                   (unless (= 0 (SetCurrentDirectory cName))
-                                     (with-foreign-string (cDrive (format nil "~A:" selStr))
-                                                          (SetCurrentDirectory cDrive))))
+                                   (when (= 0 (SetCurrentDirectory cName))
+                                     (cond
+                                      ((eql #\. (aref selStr 1))
+                                       (with-foreign-string (cDir "..")
+                                                            (SetCurrentDirectory cDir)))
+                                      ((eql #\- (aref selStr 1))
+                                       (let ((drive-name (format nil "~A:" (subseq selStr 2 3))))
+                                         (format t "Modified Drive Name: ~A~%" drive-name)
+                                         (with-foreign-string (cDrive drive-name)
+                                                              (SetCurrentDirectory cDrive))))
+                                      (t
+                                       (let ((dirName (subseq selStr 1 (1- (length selStr)))))
+                                         (with-foreign-string (cDir dirName)
+                                                              (SetCurrentDirectory cDir)))))))
               (with-foreign-pointer-as-string (szBuffer (* 2 (1+ MAX_PATH)))
                                               (GetCurrentDirectory (1+ MAX_PATH) szBuffer)
                                               (SetWindowText hwndText szBuffer))
               (SendMessage hwndList LB_RESETCONTENT 0 0)
               (with-foreign-string (cStr "*.*")
-                                   (SendMessage hwndList LB_DIR DIRATTR cStr))))
+                                   (SendMessage hwndList LB_DIR DIRATTR (pointer-address cStr)))))
           (InvalidateRect hwnd (null-pointer) 1))))
     (InvalidateRect hwnd (null-pointer) 1)
     0)
@@ -156,7 +163,7 @@
                    (SetTextColor hdc (GetSysColor COLOR_BTNTEXT))
                    (SetBkColor   hdc (GetSysColor COLOR_BTNFACE))
 
-                   (draw-text hdc contents (length contents) rect DTFLAGS)))))
+                   (draw-text hdc contents rect DTFLAGS)))))
     0)
    ((eql msg WM_DESTROY)
     (PostQuitMessage 0)
