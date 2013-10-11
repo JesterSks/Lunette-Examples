@@ -27,7 +27,7 @@
                 #:top
                 #:right
                 #:bottom)
-  (:import-from :Lunette.Controls
+  (:import-from :Lunette.Controls.Edit
                 #:ES_LEFT
                 #:ES_MULTILINE
                 #:ES_AUTOHSCROLL

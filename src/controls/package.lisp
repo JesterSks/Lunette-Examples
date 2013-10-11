@@ -36,7 +36,7 @@
                 #:SetBkMode
                 #:InvalidateRect
                 #:with-dc)
-  (:import-from :Lunette.Controls
+  (:import-from :Lunette.Controls.Button
                 #:BS_PUSHBUTTON
                 #:BS_DEFPUSHBUTTON
                 #:BS_CHECKBOX
@@ -46,9 +46,7 @@
                 #:BS_AUTO3STATE
                 #:BS_GROUPBOX
                 #:BS_AUTORADIOBUTTON
-                #:BS_OWNERDRAW
-
-                #:ScrollWindow)
+                #:BS_OWNERDRAW)
   (:import-from :Lunette.Messages
                 #:WM_SIZE
                 #:WM_CREATE
@@ -63,7 +61,8 @@
                 #:WS_VISIBLE
 
                 #:GetClientRect
-                #:ValidateRect)
+                #:ValidateRect
+                #:ScrollWindow)
     (:export #:winmain))
 
 (defpackage :Lunette.Examples.btnlook1
@@ -92,7 +91,7 @@
                 #:with-dc
                 #:GetSysColor
                 #:SetBkColor)
-  (:import-from :Lunette.Controls
+  (:import-from :Lunette.Controls.Button
                 #:BS_PUSHBUTTON
                 #:BS_DEFPUSHBUTTON
                 #:BS_CHECKBOX
@@ -102,9 +101,7 @@
                 #:BS_AUTO3STATE
                 #:BS_GROUPBOX
                 #:BS_AUTORADIOBUTTON
-                #:BS_OWNERDRAW
-
-                #:ScrollWindow)
+                #:BS_OWNERDRAW)
   (:import-from :Lunette.Messages
                 #:WM_SIZE
                 #:WM_CREATE
@@ -121,7 +118,8 @@
                 #:WS_VISIBLE
 
                 #:GetClientRect
-                #:ValidateRect)
+                #:ValidateRect
+                #:ScrollWindow)
     (:export #:winmain))
 
 (defpackage :Lunette.Examples.owndraw
@@ -161,7 +159,7 @@
                 #:Polygon
                 #:DrawFocusRect
                 #:InvertRect)
-  (:import-from :Lunette.Controls
+  (:import-from :Lunette.Controls.Button
                 #:BS_OWNERDRAW)
   (:import-from :Lunette.Messages
                 #:WM_SIZE
@@ -211,7 +209,7 @@
                 #:SetBkColor
                 #:rgb
                 #:SetRect)
-  (:import-from :Lunette.Controls
+  (:import-from :Lunette.Controls.Scrollbar
                 #:SB_PAGEDOWN
                 #:SB_LINEDOWN
                 #:SB_PAGEUP
@@ -225,11 +223,11 @@
 
                 #:SBS_VERT
 
-                #:SS_CENTER
-                #:SS_WHITERECT
-
                 #:SetScrollRange
                 #:SetScrollPos)
+  (:import-from :Lunette.Controls.Static
+                #:SS_CENTER
+                #:SS_WHITERECT)
   (:import-from :Lunette.Messages
                 #:WM_SIZE
                 #:WM_CREATE
@@ -280,7 +278,7 @@
 
                 #:loword
                 #:hiword)
-  (:import-from :Lunette.Controls
+  (:import-from :Lunette.Controls.ListBox
                 #:LBS_STANDARD
 
                 #:LBN_SELCHANGE
@@ -288,8 +286,8 @@
                 #:LB_GETCURSEL
                 #:LB_GETTEXTLEN
                 #:LB_GETTEXT
-                #:LB_ADDSTRING
-
+                #:LB_ADDSTRING)
+  (:import-from :Lunette.Controls.Static
                 #:SS_LEFT)
   (:import-from :Lunette.Messages
                 #:WM_CREATE
@@ -334,7 +332,7 @@
                 #:SetCurrentDirectory
                 #:CreateFile
                 #:ReadFile)
-  (:import-from :Lunette.Controls
+  (:import-from :Lunette.Controls.ListBox
                 #:LBS_STANDARD
 
                 #:LBN_DBLCLK
@@ -353,8 +351,8 @@
                 #:LB_DIR
                 #:LB_RESETCONTENT
 
-                #:LB_ERR
-
+                #:LB_ERR)
+  (:import-from :Lunette.Controls.Static
                 #:SS_LEFT)
   (:import-from :Lunette.Messages
                 #:WM_CREATE
