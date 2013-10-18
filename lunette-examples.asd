@@ -26,7 +26,8 @@
   :maintainer "Robert Burghart <JesterSks@gmail.com>"
   :license "Apache License Version 2.0"
   :depends-on (:cffi
-               :lunette)
+               :lunette
+               :swank)
   :components
   ((:module "src/simple"
             :components
@@ -70,4 +71,8 @@
    (:module "src/poppad"
             :components
             ((:file "package")
-             (:file "poppad1" :depends-on ("package"))))))
+             (:file "poppad1" :depends-on ("package"))))
+   (:module "src/swank"
+            :components
+            ((:file "package")
+             (:file "swank1" :depends-on ("package"))))))
