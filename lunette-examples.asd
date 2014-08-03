@@ -26,6 +26,7 @@
   :maintainer "Robert Burghart <JesterSks@gmail.com>"
   :license "Apache License Version 2.0"
   :depends-on (:cffi
+               :cl-opengl
                :lunette
                :swank)
   :components
@@ -75,4 +76,8 @@
    (:module "src/swank"
             :components
             ((:file "package")
-             (:file "swank1" :depends-on ("package"))))))
+             (:file "swank1" :depends-on ("package"))))
+   (:module "src/wgl"
+            :components
+            ((:file "package")
+             (:file "wgl-simple" :depends-on ("package"))))))
