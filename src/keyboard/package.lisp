@@ -17,65 +17,6 @@
 (defpackage :Lunette.Examples.typer
   (:use #:common-lisp
         #:cffi
+        #:cffi-sys
         #:Lunette)
-  (:import-from :Lunette.System
-                #:hiword
-                #:loword)
-  (:import-from :Lunette.Messages
-                #:WM_INPUTLANGCHANGE
-                #:WM_CREATE
-                #:WM_SIZE
-                #:WM_SETFOCUS
-                #:WM_KILLFOCUS
-                #:WM_KEYDOWN
-                #:WM_CHAR
-
-                #:SendMessage)
-  (:import-from :Lunette.VirtualKeys
-                #:VK_HOME
-                #:VK_END
-                #:VK_PRIOR
-                #:VK_NEXT
-                #:VK_LEFT
-                #:VK_RIGHT
-                #:VK_UP
-                #:VK_DOWN
-                #:VK_DELETE)
-  (:import-from :Lunette.Graphics
-                #:SYSTEM_FONT
-
-                #:RECT
-                #:left
-                #:top
-                #:right
-                #:bottom
-
-                #:GetStockObject
-                #:SelectObject
-                #:DeleteObject
-                #:with-dc
-                #:InvalidateRect)
-  (:import-from :Lunette.Windows
-                #:GetClientRect
-                #:GetFocus)
-  (:import-from :Lunette.Graphics.Text
-                #:FW_DONTCARE
-                #:DEFAULT_CHARSET
-                #:FF_DONTCARE
-                #:FIXED_PITCH
-
-                #:TEXTMETRIC
-                #:tmAveCharWidth
-                #:tmHeight
-                #:PTEXTMETRIC
-
-                #:text-out
-                #:GetTextMetrics
-                #:CreateFont
-                #:create-font
-                #:CreateCaret
-                #:SetCaretPos
-                #:ShowCaret
-                #:HideCaret
-                #:DestroyCaret)
   (:export #:winmain))

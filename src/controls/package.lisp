@@ -17,386 +17,41 @@
 (defpackage :Lunette.Examples.btnlook
   (:use #:common-lisp
         #:cffi
+        #:cffi-sys
         #:Lunette)
-  (:import-from :Lunette.System
-                #:loword
-                #:hiword)
-  (:import-from :Lunette.Graphics
-                #:SYSTEM_FIXED_FONT
-                #:TRANSPARENT
-
-                #:RECT
-                #:left
-                #:top
-                #:right
-                #:bottom
-
-                #:GetStockObject
-                #:SelectObject
-                #:SetBkMode
-                #:InvalidateRect
-                #:with-dc)
-  (:import-from :Lunette.Controls.Button
-                #:BS_PUSHBUTTON
-                #:BS_DEFPUSHBUTTON
-                #:BS_CHECKBOX
-                #:BS_AUTOCHECKBOX
-                #:BS_RADIOBUTTON
-                #:BS_3STATE
-                #:BS_AUTO3STATE
-                #:BS_GROUPBOX
-                #:BS_AUTORADIOBUTTON
-                #:BS_OWNERDRAW)
-  (:import-from :Lunette.Messages
-                #:WM_SIZE
-                #:WM_CREATE
-                #:WM_DRAWITEM
-                #:WM_COMMAND)
-  (:import-from :Lunette.Dialogs
-                #:GetDialogBaseUnits)
-  (:import-from :Lunette.Graphics.Text
-                #:text-out)
-  (:import-from :Lunette.Windows
-                #:WS_CHILD
-                #:WS_VISIBLE
-
-                #:GetClientRect
-                #:ValidateRect
-                #:ScrollWindow)
-    (:export #:winmain))
+  (:export #:winmain))
 
 (defpackage :Lunette.Examples.btnlook1
   (:use #:common-lisp
         #:cffi
+        #:cffi-sys
         #:Lunette)
-  (:import-from :Lunette.System
-                #:loword
-                #:hiword)
-  (:import-from :Lunette.Graphics
-                #:SYSTEM_FIXED_FONT
-                #:TRANSPARENT
-                #:COLOR_BTNFACE
-                #:COLOR_WINDOWTEXT
-
-                #:RECT
-                #:left
-                #:top
-                #:right
-                #:bottom
-
-                #:GetStockObject
-                #:SelectObject
-                #:SetBkMode
-                #:InvalidateRect
-                #:with-dc
-                #:GetSysColor
-                #:SetBkColor)
-  (:import-from :Lunette.Controls.Button
-                #:BS_PUSHBUTTON
-                #:BS_DEFPUSHBUTTON
-                #:BS_CHECKBOX
-                #:BS_AUTOCHECKBOX
-                #:BS_RADIOBUTTON
-                #:BS_3STATE
-                #:BS_AUTO3STATE
-                #:BS_GROUPBOX
-                #:BS_AUTORADIOBUTTON
-                #:BS_OWNERDRAW)
-  (:import-from :Lunette.Messages
-                #:WM_SIZE
-                #:WM_CREATE
-                #:WM_DRAWITEM
-                #:WM_COMMAND
-                #:WM_SYSCOLORCHANGE)
-  (:import-from :Lunette.Dialogs
-                #:GetDialogBaseUnits)
-  (:import-from :Lunette.Graphics.Text
-                #:text-out
-                #:SetTextColor)
-  (:import-from :Lunette.Windows
-                #:WS_CHILD
-                #:WS_VISIBLE
-
-                #:GetClientRect
-                #:ValidateRect
-                #:ScrollWindow)
-    (:export #:winmain))
+  (:export #:winmain))
 
 (defpackage :Lunette.Examples.owndraw
   (:use #:common-lisp
         #:cffi
+        #:cffi-sys
         #:Lunette)
-  (:import-from :Lunette.System
-                #:POINT
-                #:X
-                #:Y
-
-                #:loword
-                #:hiword)
-  (:import-from :Lunette.Graphics
-                #:WHITE_BRUSH
-                #:BLACK_BRUSH
-                #:ODS_SELECTED
-                #:ODS_FOCUS
-
-                #:DRAWITEMSTRUCT
-                #:CtlID
-                #:itemState
-                #:hDC
-                #:rcItem
-
-                #:RECT
-                #:left
-                #:top
-                #:right
-                #:bottom
-
-                #:GetStockObject
-                #:SelectObject
-                #:InvalidateRect
-                #:FillRect
-                #:FrameRect
-                #:Polygon
-                #:DrawFocusRect
-                #:InvertRect)
-  (:import-from :Lunette.Controls.Button
-                #:BS_OWNERDRAW)
-  (:import-from :Lunette.Messages
-                #:WM_SIZE
-                #:WM_CREATE
-                #:WM_DRAWITEM
-                #:WM_COMMAND)
-  (:import-from :Lunette.Dialogs
-                #:GetDialogBaseUnits)
-  (:import-from :Lunette.Graphics.Text
-                #:text-out
-                #:SetTextColor)
-  (:import-from :Lunette.Windows
-                #:WS_CHILD
-                #:WS_VISIBLE
-
-                #:GetClientRect
-                #:ValidateRect
-                #:MoveWindow
-                #:GetWindowRect)
-    (:export #:winmain))
+  (:export #:winmain))
 
 (defpackage :Lunette.Examples.colors1
   (:use #:common-lisp
         #:cffi
+        #:cffi-sys
         #:Lunette)
-  (:import-from :Lunette.System
-                #:loword
-                #:hiword)
-  (:import-from :Lunette.VirtualKeys
-                #:VK_TAB
-                #:VK_SHIFT)
-  (:import-from :Lunette.Graphics
-                #:WHITE_BRUSH
-                #:COLOR_BTNHIGHLIGHT
-
-                #:RECT
-                #:left
-                #:top
-                #:right
-                #:bottom
-
-                #:CreateSolidBrush
-                #:GetStockObject
-                #:DeleteObject
-                #:InvalidateRect
-                #:GetSysColor
-                #:SetBkColor
-                #:rgb
-                #:SetRect)
-  (:import-from :Lunette.Controls.Scrollbar
-                #:SB_PAGEDOWN
-                #:SB_LINEDOWN
-                #:SB_PAGEUP
-                #:SB_LINEUP
-                #:SB_TOP
-                #:SB_BOTTOM
-                #:SB_THUMBPOSITION
-                #:SB_THUMBTRACK
-
-                #:SB_CTL
-
-                #:SBS_VERT
-
-                #:SetScrollRange
-                #:SetScrollPos)
-  (:import-from :Lunette.Controls.Static
-                #:SS_CENTER
-                #:SS_WHITERECT)
-  (:import-from :Lunette.Messages
-                #:WM_SIZE
-                #:WM_CREATE
-                #:WM_SETFOCUS
-                #:WM_CTLCOLORSCROLLBAR
-                #:WM_CTLCOLORSTATIC
-                #:WM_KEYDOWN
-                #:WM_VSCROLL
-                #:WM_SYSCOLORCHANGE)
-  (:import-from :Lunette.Dialogs
-                #:GetDialogBaseUnits
-                #:GetDlgItem)
-  (:import-from :Lunette.Graphics.Text
-                #:SetTextColor)
-  (:import-from :Lunette.Windows
-                #:WS_CHILD
-                #:WS_VISIBLE
-                #:GWL_ID
-                #:GWL_HINSTANCE
-                #:GWL_WNDPROC
-                #:WS_TABSTOP
-                #:GCL_HBRBACKGROUND
-
-                #:MoveWindow
-                #:GetWindowLong
-                #:SetWindowLong
-                #:SetWindowText
-                #:SetClassLong
-                #:GetParent
-                #:GetKeyState
-                #:SetFocus
-                #:CallWindowProc
-                #:GetClientRect)
-    (:export #:winmain))
+  (:export #:winmain))
 
 (defpackage :Lunette.Examples.environ
   (:use #:common-lisp
         #:cffi
+        #:cffi-sys
         #:Lunette)
-  (:import-from :Lunette.System
-                #:SM_CXVSCROLL
-                #:SM_CXSCREEN
-
-                #:GetEnvironmentStrings
-                #:GetEnvironmentVariable
-                #:FreeEnvironmentStrings
-                #:GetSystemMetrics
-
-                #:loword
-                #:hiword)
-  (:import-from :Lunette.Controls.ListBox
-                #:LBS_STANDARD
-
-                #:LBN_SELCHANGE
-
-                #:LB_GETCURSEL
-                #:LB_GETTEXTLEN
-                #:LB_GETTEXT
-                #:LB_ADDSTRING)
-  (:import-from :Lunette.Controls.Static
-                #:SS_LEFT)
-  (:import-from :Lunette.Messages
-                #:WM_CREATE
-                #:WM_SETFOCUS
-                #:WM_COMMAND
-
-                #:SendMessage)
-  (:import-from :Lunette.Dialogs
-                #:GetDialogBaseUnits)
-  (:import-from :Lunette.Windows
-                #:WS_CHILD
-                #:WS_VISIBLE
-
-                #:SetWindowText
-                #:SetFocus)
-    (:export #:winmain))
+  (:export #:winmain))
 
 (defpackage :Lunette.Examples.head
   (:use #:common-lisp
         #:cffi
+        #:cffi-sys
         #:Lunette)
-  (:import-from :Lunette.System
-                #:DWORD
-                #:SM_CXVSCROLL
-
-                #:GetSystemMetrics
-                #:CloseHandle
-
-                #:makelong
-                #:loword
-                #:hiword)
-  (:import-from :Lunette.VirtualKeys
-                #:VK_RETURN)
-  (:import-from :Lunette.Files
-                #:GENERIC_READ
-                #:FILE_SHARE_READ
-                #:OPEN_EXISTING
-                #:MAX_PATH
-                #:INVALID_HANDLE_VALUE
-
-                #:GetCurrentDirectory
-                #:SetCurrentDirectory
-                #:CreateFile
-                #:ReadFile)
-  (:import-from :Lunette.Controls.ListBox
-                #:LBS_STANDARD
-
-                #:LBN_DBLCLK
-
-                #:DDL_READWRITE
-                #:DDL_READONLY
-                #:DDL_HIDDEN
-                #:DDL_SYSTEM
-                #:DDL_DIRECTORY
-                #:DDL_ARCHIVE
-                #:DDL_DRIVES
-
-                #:LB_GETCURSEL
-                #:LB_GETTEXTLEN
-                #:LB_GETTEXT
-                #:LB_DIR
-                #:LB_RESETCONTENT
-
-                #:LB_ERR)
-  (:import-from :Lunette.Controls.Static
-                #:SS_LEFT)
-  (:import-from :Lunette.Messages
-                #:WM_CREATE
-                #:WM_SIZE
-                #:WM_SETFOCUS
-                #:WM_COMMAND
-                #:WM_KEYDOWN
-
-                #:SendMessage)
-  (:import-from :Lunette.Dialogs
-                #:GetDialogBaseUnits)
-  (:import-from :Lunette.Windows
-                #:WS_CHILD
-                #:WS_VISIBLE
-                #:GWL_WNDPROC
-
-                #:SetWindowText
-                #:SetWindowLong
-                #:SetFocus
-                #:GetParent
-                #:CallWindowProc)
-  (:import-from :Lunette.Graphics
-                #:COLOR_BTNTEXT
-                #:COLOR_BTNFACE
-                #:SYSTEM_FIXED_FONT
-
-                #:RECT
-                #:left
-                #:top
-                #:right
-                #:bottom
-
-                #:with-ps
-                #:GetStockObject
-                #:SelectObject
-                #:SetBkColor
-                #:InvalidateRect
-                #:GetSysColor)
-  (:import-from :Lunette.Graphics.Text
-                #:DT_WORDBREAK
-                #:DT_EXPANDTABS
-                #:DT_NOCLIP
-                #:DT_NOPREFIX
-
-                #:SetTextColor
-                #:draw-text)
-    (:export #:winmain))
+  (:export #:winmain))

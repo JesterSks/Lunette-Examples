@@ -17,8 +17,5 @@
 (defpackage :Lunette.Examples.swank
   (:use #:common-lisp
         #:cffi
-        #:lunette)
-  (:import-from :Lunette.Messages
-                #:PM_REMOVE
-
-                #:PeekMessage))
+        #:cffi-sys
+        #:lunette))

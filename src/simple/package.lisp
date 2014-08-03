@@ -17,11 +17,13 @@
 (defpackage :Lunette.Examples.Simple-Win
   (:use #:common-lisp
         #:cffi
+        #:cffi-sys
         #:Lunette)
   (:export #:winmain))
 
 (defpackage :Lunette.Examples.Hello-Paint
   (:use #:common-lisp
         #:cffi
+        #:cffi-sys
         #:Lunette)
   (:export #:winmain))
