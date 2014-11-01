@@ -20,3 +20,17 @@
         #:cffi-sys
         #:Lunette)
   (:export #:winmain))
+
+(defpackage :Lunette.Examples.Char
+  (:use #:common-lisp
+        #:cffi
+        #:cffi-sys
+        #:Lunette)
+  (:export #:winmain))
+
+(defpackage :Lunette.Examples.Virtual-Key
+  (:use #:common-lisp
+        #:cffi
+        #:cffi-sys
+        #:Lunette)
+  (:export #:winmain))
