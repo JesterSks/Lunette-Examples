@@ -62,3 +62,17 @@
         #:cffi-sys
         #:Lunette)
   (:export #:winmain))
+
+(defpackage :Lunette.Examples.click
+  (:use #:common-lisp
+        #:cffi
+        #:cffi-sys
+        #:Lunette)
+  (:export #:winmain))
+
+(defpackage :Lunette.Examples.click2
+  (:use #:common-lisp
+        #:cffi
+        #:cffi-sys
+        #:Lunette)
+  (:export #:winmain))

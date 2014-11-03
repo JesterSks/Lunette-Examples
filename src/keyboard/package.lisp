@@ -34,3 +34,24 @@
         #:cffi-sys
         #:Lunette)
   (:export #:winmain))
+
+(defpackage :Lunette.Examples.Textout
+  (:use #:common-lisp
+        #:cffi
+        #:cffi-sys
+        #:Lunette)
+  (:export #:winmain))
+
+(defpackage :Lunette.Examples.Textout2
+  (:use #:common-lisp
+        #:cffi
+        #:cffi-sys
+        #:Lunette)
+  (:export #:winmain))
+
+(defpackage :Lunette.Examples.Textout3
+  (:use #:common-lisp
+        #:cffi
+        #:cffi-sys
+        #:Lunette)
+  (:export #:winmain))

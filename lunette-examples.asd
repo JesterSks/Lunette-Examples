@@ -50,9 +50,12 @@
    (:module "src/keyboard"
             :components
             ((:file "package")
-             (:file "typer" :depends-on ("package"))
-             (:file "char"  :depends-on ("package"))
-             (:file "virtual-key" :depends-on ("package"))))
+             (:file "typer"       :depends-on ("package"))
+             (:file "char"        :depends-on ("package"))
+             (:file "virtual-key" :depends-on ("package"))
+             (:file "textout"     :depends-on ("package"))
+             (:file "textout2"    :depends-on ("package"))
+             (:file "textout3"    :depends-on ("package"))))
    (:module "src/mouse"
             :components
             ((:file "package")
@@ -62,7 +65,9 @@
              (:file "checker3" :depends-on ("package"))
              (:file "checker4" :depends-on ("package"))
              (:file "blokout1" :depends-on ("package"))
-             (:file "blokout2" :depends-on ("package"))))
+             (:file "blokout2" :depends-on ("package"))
+             (:file "click"    :depends-on ("package"))
+             (:file "click2"   :depends-on ("package"))))
    (:module "src/controls"
             :components
             ((:file "package")
