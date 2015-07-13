@@ -14,7 +14,7 @@
    limitations under the License.
 |#
 
-(in-package :Lunette.Examples.Char-Paint)
+(in-package :Lunette.Examples.Textout2)
 
 (defvar *char-offset* 0)
 (defvar *last-str* "Sample Output")
